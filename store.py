@@ -1,4 +1,6 @@
 import requests
+import pandas as pd
+from fastapi import FastAPI
 
 def request(URL : str):
     return requests.get(URL)
@@ -18,3 +20,18 @@ def get_categories():
     jsonr = read_request_json('https://api.escuelajs.co/api/v1/categories')
     for category in jsonr:
         print(category['name'])
+
+
+def csv_to_pandas(csv):
+    df = pd.read_csv(csv)
+    return df
+
+app = FastAPI()
+
+@app.get("/")
+def SayHello():
+    return f'Hello World!!!'
+
+@app.get("/game/RPS")
+def initRPSGame():
+    return f'Starting the game...'
